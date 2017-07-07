@@ -34,17 +34,28 @@ public class MySQLDB {
             Statement tbl_query = connection.createStatement();
             ResultSet tbl_results = tbl_query.executeQuery("show tables");
             ResultSetMetaData tbl_meta = tbl_results.getMetaData();
-
             int tbl_numColumns = tbl_meta.getColumnCount();
             for (int i = 1; i <= tbl_numColumns; i++) {
                 System.out.print("Table Header\t - " + tbl_meta.getColumnName(i));
             }
             System.out.println();
             while (tbl_results.next()) {
-                for (int i = 1; i <= tbl_numColumns; i++) {
-                    System.out.print("Table Name\t - " + i + " - " + tbl_results.getObject(i));
+                for (int ti = 1; ti <= tbl_numColumns; ti++) {
+                    System.out.print("Table Name\t - " + ti + " - " + tbl_results.getObject(ti));
                     System.out.println();
+                    
                     Statement col_query = connection.createStatement();
+                    ResultSet col_results = col_query.executeQuery("show columns from " + tbl_results.getObject(ti));
+                    ResultSetMetaData col_meta = col_results.getMetaData();
+                    
+                    
+                    int col_numColumns = col_meta.getColumnCount();
+                    
+                    System.out.print(col_numColumns);
+                    
+                    for (int ci = 1; ci <= col_numColumns; ci++) {
+                   // System.out.print("Column Header\t - " + col_results.getObject(i));
+            }
 
 ////  GET COLUMN DATA                   
 //                  
